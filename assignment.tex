@@ -31,7 +31,9 @@
 \usepackage{caption}
 \usepackage{listings}
 \usepackage[usenames,dvipsnames]{xcolor}
-\renewcommand{\theenumi}{\Alph{enumi}}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+%\renewcommand{\theenumi}{\Alph{enumi}}
 \begin{document}
 \title{COMS W4771 - Machine Learning 5th Exersice}
 
