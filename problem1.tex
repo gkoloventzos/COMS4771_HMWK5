@@ -1,0 +1,24 @@
+\section*{1}
+The problem described here is the famous Monty hall problem.
+We will analyze the what happens when you choose the first door as
+your choise. W.l.o.g. is the same if you choose any of the other 2 doors.
+Let assume that the C$x$ event is that the car is behind door $x$.
+So $P(Cx) = \frac{1}{3}$. Also let assume that user choosing door $x$ is D$x$.
+Also host opening door $x$ is represented H$x$. Also $P(Cx\mid D1) = \frac{1}{3}$.
+Also we have the probabilities:
+\begin{align*}
+P(H3\mid C1,D1) &= \frac{1}{2}\\
+P(H3\mid C2,D1) &= 1\\
+P(H3\mid C3,D1) &= 0
+\end{align*}
+Because if the car is in behind door 1 then the host can open any of the other 2.
+If car is behind door 2 then he has to open the 3rd door. And it will not open the 
+3rd door if the car is behind that door. So if the player select door 1 and the host
+opens the 3rd, the probability of winning by switching is:
+\begin{align*}
+P(C2\mid H3,D1) &= \frac{P(H3\mid C2,D1) P(C2\mid D1)}{P(H3\mid D1)}\\
+&= \frac{P(H3\mid C2,D1) P(C2\mid D1)}{P(H3\mid C1,D1) P(C1\mid X1) + P(H3\mid C2,D1) P(C2\mid X1) + P(H3\mid C3,D1) P(C3\mid X1)}\\
+&= \frac{P(H3\mid C2,D1)}{P(H3\mid C1,D1) + P(H3\mid C2,D1) + P(H3\mid C3,D1)}\\
+&= \frac{1}{\frac{1}{2} + 1 + 0} = \frac{2}{3}
+\end{align*}
+So it is better to change doors.
