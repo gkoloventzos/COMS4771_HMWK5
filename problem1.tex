@@ -17,7 +17,7 @@ If car is behind door 2 then he has to open the 3rd door. And it will not open t
 opens the 3rd, the probability of winning by switching is:
 \begin{align*}
 P(C2\mid H3,D1) &= \frac{P(H3\mid C2,D1) P(C2\mid D1)}{P(H3\mid D1)}\\
-&= \frac{P(H3\mid C2,D1) P(C2\mid D1)}{P(H3\mid C1,D1) P(C1\mid X1) + P(H3\mid C2,D1) P(C2\mid X1) + P(H3\mid C3,D1) P(C3\mid X1)}\\
+&= \frac{P(H3\mid C2,D1) P(C2\mid D1)}{P(H3\mid C1,D1) P(C1\mid D1) + P(H3\mid C2,D1) P(C2\mid D1) + P(H3\mid C3,D1) P(C3\mid D1)}\\
 &= \frac{P(H3\mid C2,D1)}{P(H3\mid C1,D1) + P(H3\mid C2,D1) + P(H3\mid C3,D1)}\\
 &= \frac{1}{\frac{1}{2} + 1 + 0} = \frac{2}{3}
 \end{align*}
