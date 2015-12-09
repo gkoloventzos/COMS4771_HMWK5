@@ -5,14 +5,14 @@ So for our graph we have:
 p(x_1,\dotsc,x_5) = p(x_1)p(x_3)p(x_2\mid x_1)p(x_4\mid x_{1},x_3)p(x_5\mid x_{2},x_4)
 \end{align*}
 \begin{enumerate}
-\item False. As no node is shaded the ball can go from $x_2$ to $x_1$ and reach $x_4$ (2 effects handout 15 p.12)
-\item False. As $x_5$ is shaded the ball can reach $x_4$ by this node.
+\item False. Path: $x_1$
+\item False. Path: $x_5$
 \item True. The ball will bounce at $x_5$ and also will stop at $x_1$.
-\item True. The ball can reach $x_5$ to $x_3$ through $x_2, x_1, x_4$.
+\item False. Path: $x_2$ - $x_1$ - $x_4$ - $x_3$
 \item True. With the addition of $x_2$ the previous path (4) is blocked.
-\item False. The ball can reach $x_3$ by $x_1, x_2, x_5, x_4$.
-\item False. The previous path (7) is blocked when $x_2$ is shaded.
-\item False. The ball will bounce at $x_5$ and also at $x_4$. So $x_2 \independent x_3$. 
-\item False. Because now the ball is passes from $x_4$ coming from $x_5$.
-\item False. Because now the ball is passes from $x_4$ coming from $x_1$
+\item False. Path: $x_1$ - $x_2$ - $x_5$ - $x_4$ = $x_3$
+\item True. 
+\item True.
+\item False. Path: $x_2$ - $x_5$ - $x_4$ - $x_3$
+\item False. Path: $x_2$ - $x_1$ - $x_4$ - $x_3$
 \end{enumerate}
