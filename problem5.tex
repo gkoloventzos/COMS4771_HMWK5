@@ -1,1 +1,79 @@
 \section*{5}
+For this problem we will use Hidden Markov Model to find what is the most probable
+state of Super Mario. We have $T=5$ observations. $N=2$ number of states $Q=\{Happy(H), Angry(A)\}$,
+$M=4$ observations symbols with $V=\{smile(s), frown(f), laugh(l), yell(y)\}$.
+The state transision probabilies are depicting in table ~\ref{tab:a}. The observations
+we have is $O = \{s, y, f, f, l\}$.
+\begin{table}[ht]
+ \centering
+  \begin{tabular}{ | c || c | c | }
+    \hline
+     & H & A \\ \hline
+    H & 0.8 & 0.2 \\ \hline
+    A & 0.2 & 0.8 \\ \hline
+  \end{tabular}
+    \caption{Transition Probabilities}\label{tab:a}
+\end{table}
+The emmision probabilties can be found in table ~\ref{tab:b}
+\begin{table}[ht]
+ \centering
+  \begin{tabular}{ | c || c | c | c | c | }
+    \hline
+     & s & y & f & l \\ \hline
+    H & 0.4 & 0.1 & 0.3 & 0.2 \\ \hline
+    A & 0.1 & 0.4 & 0.2 & 0.3 \\ \hline
+  \end{tabular}
+    \caption{Emission probabilities}\label{tab:b}
+\end{table}
+The initial state probability is $\pi = [ 1 0 ]$ as the problem statement tells us that he is happy.
+In order to find the most probable state sequence we will calculate the probability of each state stransition
+with the following formula.\\
+\\
+\begin{align*}
+P(X) = \pi_{x_1}b_{x_1}(O_1)a_{{x_1},{x_2}}b_{x_2}(O_2)a_{{x_2},{x_3}}b_{x_3}(O_3)a_{{x_3},{x_4}}b_{x_4}(O_4)a_{{x_4},{x_5}}b_{x_5}
+\end{align*}
+where $X = \{x_{1}, x_{2}, x_{3}, x_{4}, x_{5}\}$ is a sequence of states and $O_{1},O_{2},O_{3},O_{4},O_{5}$ 
+are the corresponding observations. Moreover $\pi_{x_1}$ is the initial probability which is equal 
+to 1 as we know Super Mario is happy. Futhermore $b_x(y)$ is the probability of observation y at state x (Table ~\ref{tab:b}) and
+$a_{i,j}$ is the probability of the transition from state i to state j (Table ~\ref{tab:a}).
+\begin{table}[ht]
+ \centering
+  \begin{tabular}{ | c || c | c | }
+    \hline
+    State & Probability & Normalized Probability \\ \hline
+    HHHHH & 0.000098304 & 0.082139037 \\ \hline
+    HHHHA & 0.000016384 & 0.013689840 \\ \hline
+    HHHAH & 0.000024576 & 0.020534759 \\ \hline
+    HHHAA & 0.000065536 & 0.054759358 \\ \hline
+    HHAHH & 0.000024576 & 0.020534759 \\ \hline
+    HHAHA & 0.000004096 & 0.003422460 \\ \hline
+    HHAAH & 0.000098304 & 0.082139037 \\ \hline
+    HHAAA & 0.000262144 & 0.219037433 \\ \hline
+    HAHHH & 0.000009216 & 0.007700535 \\ \hline
+    HAHHA & 0.000001536 & 0.001283422 \\ \hline
+    HAHAH & 0.000002304 & 0.001925134 \\ \hline
+    HAHAA & 0.000006144 & 0.005133690 \\ \hline
+    HAAHH & 0.000036864 & 0.030802139 \\ \hline
+    HAAHA & 0.000006144 & 0.005133690 \\ \hline
+    HAAAH & 0.000006144 & 0.123208556 \\ \hline
+    HAAAA & 0.000393216 & 0.328556150 \\ \hline
+  \end{tabular}
+    \caption{State Sequence Probabilities}\label{tab:c}
+\end{table}
+
+Having the normalized probabilities we will add the probabilities of state Happy for every
+day and find out what is the most probable state with the HMM probabilities.
+
+\begin{table}[ht]
+ \centering
+  \begin{tabular}{ | c || c | c | c | c | c |}
+    \hline
+    State Probability & Day 1 & Day 2 & Day 3 & Day4 & Day 5 \\ \hline
+    H & 1 & 0.496256683 & 0.187165775 & 0.164705882 & 0.368983956 \\ \hline
+    A & 0 & 0.503743317 & 0.812834225 & 0.835294118 & 0.631016044 \\ \hline
+  \end{tabular}
+    \caption{HMM probabilities}\label{tab:hmm}
+\end{table}
+
+From table ~\ref{tab:hmm} we observe that the most likely state sequence is \\
+$\{Happy, Angry, Angry, Angry, Angry\}$ probably because the princess is in another castle!
