@@ -1,72 +1,58 @@
-function jta(N)
+function [psis, phis] = jta(clique)
+%function [psis_dstar, phis_dstar] = jta(clique)
+%
+%
+% clique : if present the starting psis
+%
+%
 
-psis = cell(N-1,1);
-phis_dstar = cell(N-2,1);
-psis_star = cell(N-1,1);
-psis_dstar = cell(N-1,1);
-phis_star = cell(N-2,1);
-for i=1:(N-1)
-    psis{i} = rand(2,2);
-    psis_star{i} = rand(2,2);
-    psis_dstar{i} = rand(2,2);
+if nargin == 1
+    psis = clique;
+else
+    psis = cell(4,1);
+    for i=1:4
+        psis{i} = rand(2,2);
+    end
+    psis{1} = [0.1 0.7; 0.8 0.3];
+    psis{2} = [0.5 0.1; 0.1 0.5];
+    psis{3} = [0.1 0.5; 0.5 0.1];
+    psis{4} = [0.9 0.3; 0.1 0.3];
 end
 
-psis_star{1}(1) = 0.1;
-psis_star{1}(2) = 0.7;
-psis_star{1}(3) = 0.8;
-psis_star{1}(4) = 0.3;
-psis_star{2}(1) = 0.5;
-psis_star{2}(2) = 0.1;
-psis_star{2}(3) = 0.1;
-psis_star{2}(4) = 0.5;
-psis_star{3}(1) = 0.1;
-psis_star{3}(2) = 0.5;
-psis_star{3}(3) = 0.5;
-psis_star{3}(4) = 0.1;
-psis_star{4}(1) = 0.9;
-psis_star{4}(2) = 0.3;
-psis_star{4}(3) = 0.1;
-psis_star{4}(4) = 0.3;
+N = length(psis)+1;
+
+phis = cell(N-2,1);
 
 for i=1:(N-2)
-    phis_star{i} = rand(2,1);
-    phis_dstar{i} = rand(2,1);
+    phis{i} = ones(2,1);
 end
 
 for i=1:(N-2)
     tmp = psis{i};
-    phis_star{i}(1) = tmp(1,1)+tmp(2,1);
-    phis_star{i}(2) = tmp(1,2)+tmp(2,2);
-    phis_star{i}
-end
-%all phis_star are here.
-
-psis_star{1} = psis{1};
-
-for i=2:(N-1)
-    psis_star{i}(1) = phis_star{i-1}(1)*psis{i}(1);
-    psis_star{i}(3) = phis_star{i-1}(1)*psis{i}(3);
-    psis_star{i}(2) = phis_star{i-1}(2)*psis{i}(2);
-    psis_star{i}(4) = phis_star{i-1}(2)*psis{i}(4);
-end
-
-for i=1:(N-1)
-    psis_star{i}
+    tmp2 = psis{i+1};
+    phi = sum(tmp,2);
+    p = phis{i};
+    tmp_phi = phi / p;
+    psis{i+1} = tmp_phi*tmp2;
+    phis{i} = phi;
 end
 
 for i=(N-2):-1:1
-    tmp = psis_star{i+1};
-    phis_dstar{i}(1) = tmp(1,1)+tmp(2,1);
-    phis_dstar{i}(2) = tmp(1,2)+tmp(2,2);
-    phis_dstar{i}
+    tmp = psis{i};
+    tmp2 = psis{i+1};
+    phi = sum(tmp2,1)';
+    p = phis{i};
+    tmp_phi = phi / p;
+    psis{i} = tmp_phi*tmp;
+    phis{i} = phi;
 end
 
-psis_dstar{end} = psis_star{end};
-for i=(N-2):-1:1
-    psis_dstar{i}(1) = (phis_dstar{i}(1)/phis_star{i}(1))*psis_star{i}(1);
-    psis_dstar{i}(3) = (phis_dstar{i}(1)/phis_star{i}(1))*psis_star{i}(3);
-    psis_dstar{i}(2) = (phis_dstar{i}(2)/phis_star{i}(2))*psis_star{i}(2);
-    psis_dstar{i}(4) = (phis_dstar{i}(2)/phis_star{i}(2))*psis_star{i}(4);
+for i = 1:N-1
+    psis{i} = psis{i} / sum(sum(psis{i}));
+end
+
+for i = 1:N-2
+    phis{i} = phis{i} / sum(phis{i});
 end
 
 end
